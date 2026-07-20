@@ -7,6 +7,12 @@ const container = document.querySelector("#grid-container");
 let counter = 0;
 let gridSize = 16;
 
+// Reset Button
+resetButton = document.querySelector("#reset");
+
+// Edit Button
+editButton = document.querySelector("#edit");
+
 // For loop, rows and cols
 for (let rows = 0; rows < 16; rows++) {
   let rowDiv = document.createElement("div");
@@ -21,6 +27,9 @@ for (let rows = 0; rows < 16; rows++) {
     console.log(`(COL) Box #${counter} completed`);
   }
 }
+
+const display = document.querySelector("#display");
+display.textContent = `${gridSize} x ${gridSize} Grid`;
 
 const allBoxes = document.querySelectorAll(".box-div");
 allBoxes.forEach((div) => {
