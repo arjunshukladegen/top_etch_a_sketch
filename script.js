@@ -20,6 +20,32 @@ const rainbowTheme = {
   10: "#F15BB5",
 };
 
+function randomHex() {
+  hexCode = "#";
+
+  for (let i = 0; i < 6; i++) {
+    // Random number from 0-15
+    let randomNum = Math.round(Math.random() * 100) % 16;
+    if (randomNum > 9) {
+      if (randomNum === 10) {
+        randomNum = "A";
+      } else if (randomNum === 11) {
+        randomNum = "B";
+      } else if (randomNum === 12) {
+        randomNum = "C";
+      } else if (randomNum === 13) {
+        randomNum = "D";
+      } else if (randomNum === 14) {
+        randomNum = "E";
+      } else if (randomNum === 15) {
+        randomNum = "F";
+      }
+    }
+    hexCode = hexCode + randomNum;
+  }
+  return hexCode;
+}
+
 // Returns random number from 1-10, for color theme/modes
 function randomColor() {
   // Gets a random number from 1 to 10
@@ -28,10 +54,10 @@ function randomColor() {
 }
 
 function pickColor(colorMode) {
-  if (colorMode === "colors") {
-    return randomColor();
-  } else if (colorMode === "trueRandom") {
-    return "#000000";
+  if (colorMode === "rainbow") {
+    return rainbowTheme[randomColor()];
+  } else if (colorMode === "random") {
+    return randomHex();
   } else {
     return "#000000";
   }
@@ -76,17 +102,26 @@ function reloadUI(gridSize) {
 }
 
 // Error Message
-let errorMessage = document.querySelector("#error");
+const errorMessage = document.querySelector("#error");
 
 // Colors Button
-let colorButton = document.querySelector("#color");
+const colorButton = document.querySelector("#color");
+const colorSelection = document.getElementById("color-select");
+colorSelection.value = "default";
 
 colorButton.addEventListener("click", (e) => {
   e.preventDefault();
+
+  if (colorMode === colorSelection.value) {
+    errorMessage.textContent = `Theme was already selected.`;
+  } else {
+    colorMode = colorSelection.value;
+  }
+  reloadUI(gridSize);
 });
 
 // Reset Button
-let resetButton = document.querySelector("#reset");
+const resetButton = document.querySelector("#reset");
 
 resetButton.addEventListener("click", (e) => {
   e.preventDefault();
