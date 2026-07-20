@@ -40,9 +40,10 @@ function pickColor(colorMode) {
 // Select container for the grid
 const container = document.querySelector("#grid-container");
 
-// Testing tool (for console.log)
-let started = false;
+// Default Values
 let gridSize = 16;
+const inputValue = document.querySelector("#size-input");
+inputValue.value = gridSize;
 
 function reloadUI(gridSize) {
   // Get rid of anything previously left behind
@@ -74,22 +75,32 @@ function reloadUI(gridSize) {
   });
 }
 
-errorMessage = document.querySelector("#error");
+// Error Message
+let errorMessage = document.querySelector("#error");
+
+// Colors Button
+let colorButton = document.querySelector("#color");
+
+colorButton.addEventListener("click", (e) => {
+  e.preventDefault();
+});
 
 // Reset Button
-resetButton = document.querySelector("#reset");
+let resetButton = document.querySelector("#reset");
 
 resetButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
   reloadUI(gridSize);
 });
 
 // Edit Button
-editButton = document.querySelector("#edit");
+const editButton = document.querySelector("#edit");
 
-editButton.addEventListener("click", () => {
-  let userValue = document.querySelector('input[type="text"]').value;
-  console.log(`Value: ${userValue}`);
-  // gridSize = sizeInput.value;
+editButton.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  gridSize = inputValue.value;
   if (gridSize > 100 || gridSize < 1) {
     errorMessage.textContent = `Error: Cannot display ${gridSize} x ${gridSize}`;
     gridSize = 16;
