@@ -58,12 +58,13 @@ button {
   color: #000000;
   height: 4rem;
   width: 8rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-style: solid;
   border-color: #000000;
   border-width: 2px;
   border-radius: 10px;
   color: darkred;
+  margin-bottom: 1rem;
 }
 
 button:hover {
@@ -81,9 +82,25 @@ button:hover {
   padding-bottom: 1rem;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
 }
 
 h2 {
   text-align: center;
+}
+
+form {
+  /* border-width: 2px;
+  border-color: black;
+  border-style: solid; */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+input {
+  text-align: center;
+  width: 6rem;
+  border-radius: 10px;
 }

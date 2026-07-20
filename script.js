@@ -1,5 +1,42 @@
 // Create a 16x16 grid of square divs.
 
+// Options: 'default'
+let colorMode = "default";
+
+// Returns hex code of random color selection
+// color = `${rainbowTheme[randomNum]}`;
+
+// Colors
+const rainbowTheme = {
+  1: "#E63946",
+  2: "#F3722C",
+  3: "#F9C80E",
+  4: "#90BE6D",
+  5: "#43AA8B",
+  6: "#0FBFCF",
+  7: "#277DA1",
+  8: "#5E60CE",
+  9: "#9B5DE5",
+  10: "#F15BB5",
+};
+
+// Returns random number from 1-10, for color theme/modes
+function randomColor() {
+  // Gets a random number from 1 to 10
+  let randomNum = (Math.round(Math.random() * 100) % 10) + 1;
+  return randomNum;
+}
+
+function pickColor(colorMode) {
+  if (colorMode === "colors") {
+    return randomColor();
+  } else if (colorMode === "trueRandom") {
+    return "#000000";
+  } else {
+    return "#000000";
+  }
+}
+
 // Select container for the grid
 const container = document.querySelector("#grid-container");
 
@@ -30,7 +67,9 @@ function reloadUI(gridSize) {
   const allBoxes = document.querySelectorAll(".box-div");
   allBoxes.forEach((div) => {
     div.addEventListener("mouseenter", function (e) {
-      div.style.backgroundColor = "#000000";
+      if (div.style.backgroundColor === "") {
+        div.style.backgroundColor = pickColor(colorMode);
+      }
     });
   });
 }
@@ -48,7 +87,9 @@ resetButton.addEventListener("click", (e) => {
 editButton = document.querySelector("#edit");
 
 editButton.addEventListener("click", () => {
-  gridSize = prompt("Enter new pixel width");
+  let userValue = document.querySelector('input[type="text"]').value;
+  console.log(`Value: ${userValue}`);
+  // gridSize = sizeInput.value;
   if (gridSize > 100 || gridSize < 1) {
     errorMessage.textContent = `Error: Cannot display ${gridSize} x ${gridSize}`;
     gridSize = 16;
